@@ -2,19 +2,98 @@
 //
 
 #include <iostream>
+#include <string>
+#include <vector>
+#define PRIMEIRA_LETRA 'A'
+
+
+void printar_espacamento() {
+    int espacamento = 50;
+    for (int i = 0; i < espacamento; i++)
+    {
+        std::cout << " ";
+    }
+}
+
+void construir_velha(std::string** velha_tabuleiro) {
+   
+    std::string velha_bloco = "|__|__|__|";
+    
+    char coluna_letras = 'A';
+    printar_espacamento();
+    for (int i = 1; i <=3; i++)
+    {
+        std::cout << i << "  ";
+
+    }
+    std::cout << "\n";
+    for (int i = 0; i < 3; i++)
+    {
+        printar_espacamento();
+        velha_tabuleiro[i] = velha_tabuleiro[i]->append(velha_bloco);
+        std::cout << coluna_letras++ << velha_bloco << std::endl;
+
+    }
+}
+
+void pegar_input(int& linha,int& coluna) {
+    std::string coordendas;
+    std::cout << "Digite as coordenadas" << std::endl;
+    std::cin >> coordendas;
+    linha = static_cast<int>(coordendas[0])-PRIMEIRA_LETRA;
+    coluna = coordendas[1]-'0';
+
+    
+
+}
+void limpar() {
+    system("cls");
+}
+
+void inserir_X(int& linha, int& coluna,char** velha_tabuleiro) {
+    if (velha_tabuleiro[linha][coluna] != ' ') {
+        velha_tabuleiro[linha][coluna] = 'X';
+    }
+
+}
+
+
+bool velha_cheio(const char** velha_tabuleiro) {
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (velha_tabuleiro[i][j]==' ')
+            {
+                return false;
+
+            }
+            else {
+                return true;
+            }
+
+        }
+
+    }
+}
+
+
+void jogar(char** velha_tabuleiro) {
+    construir_velha();
+    int linha = 0;
+    int coluna = 0;
+    while (!velha_cheio(velha_tabuleiro)) {
+        pegar_input(linha, coluna);
+    }
+}
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    char velha_tabuleiro[3][3] = { {' '} };
+
+
+    
+    
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
